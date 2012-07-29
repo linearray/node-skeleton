@@ -20,8 +20,8 @@ proxiedIp = ->
 app = express()
 
 app.set 'port', process.env.PORT || 31337
-app.engine '.html', cons.handlebars
-app.set 'view engine', 'html'
+app.engine '.ejs', cons.ejs
+app.set 'view engine', 'ejs'
 app.set 'views', __dirname + '/../views'
 app.set 'trust proxy', true
 app.use proxiedIp()
