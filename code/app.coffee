@@ -43,7 +43,7 @@ app.use stylus.middleware
   compile: (str,path) ->
       stylus(str).set('filename',path).set('warn', true).set('compress',true)
 
-app.use express.static path.join __dirname, 'public'
+app.use express.static path.join __dirname, '/../public'
 
 app.use express.errorHandler
   dumpExceptions: true
