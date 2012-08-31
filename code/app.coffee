@@ -10,10 +10,10 @@ stylus = require 'stylus'
 path = require 'path'
 
 proxiedIp = ->
-    (req, res, next) ->
-      if req.headers['cf-connecting-ip']?
-        req.ip_proxied = req.headers['cf-connecting-ip']
-      else
+  (req, res, next) ->
+    if req.headers['cf-connecting-ip']?
+      req.ip_proxied = req.headers['cf-connecting-ip']
+    else
       req.ip_proxied = req.ips[req.ips.length-1]
       next()
 
@@ -28,7 +28,7 @@ app.use proxiedIp()
 app.use express.favicon()
 
 if app.settings.env == 'production'
-    app.use express.logger()
+  app.use express.logger()
 else
   app.use express.logger 'dev'
 
@@ -41,7 +41,7 @@ app.use stylus.middleware
   src: __dirname + '/../views'
   dest: __dirname + '/../public'
   compile: (str,path) ->
-      stylus(str).set('filename',path).set('warn', true).set('compress',true)
+    stylus(str).set('filename',path).set('warn', true).set('compress',true)
 
 app.use express.static path.join __dirname, '/../public'
 
@@ -52,4 +52,4 @@ app.use express.errorHandler
 app.get '/', routes.index
 
 (http.createServer app).listen (app.get 'port'), ->
-    console.log "Express #{app.settings.env} server listening on port " + app.get 'port'
+  console.log "Express #{app.settings.env} server listening on port " + app.get 'port'
